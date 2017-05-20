@@ -15,29 +15,29 @@ class Game {
 
   init () {
     this.server.on('connect', (data) => {
+      console.log('player connected')
       this.newPlayer(data)
     })
 
     this.server.on('disconnect', (data) => {
       this.disconnectPlayer(data)
+      console.log('player disconnected')
     })
 
     this.server.on('left', (id) => {
-      this.players[id].setVelocityX(-1)
+      console.log('left key pressed')
     })
 
     this.server.on('right', (data) => {
-      console.log(data)
-      debugger;
-      this.players[data.id].setVelocityX(1)
+      console.log('right key pressed')
     })
 
     this.server.on('up', (id) => {
-      this.players[id].setVelocityY(1)
+      console.log('up key pressed')
     })
 
     this.server.on('down', (id) => {
-      this.players[id].setVelocityY(-1)
+      console.log('down key pressed')
     })
 
     this.id = gameloop.setGameLoop((delta) => {
@@ -88,7 +88,8 @@ class Game {
       this.players[id].update(delta)
     }
 
-    this.updateAllClients()
+    this.sendToAll('update')
+    // this.updateAllClients()
   }
 }
 

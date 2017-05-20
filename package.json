@@ -10,10 +10,7 @@
     "coverage": "nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls",
     "report": "nyc report --reporter=html npm test && open ./coverage/index.html"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/z3t0/instant-server.git"
-  },
+  "repository": "git+https://github.com/z3t0/instant-server.git",
   "author": "Rafi Khan",
   "license": "MIT",
   "bugs": {

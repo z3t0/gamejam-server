@@ -11,13 +11,7 @@ class Player {
     this.sizeX = 0.05
     this.sizeY = 0.05
 
-    this.vx = 0
-    this.vy = 1
-
     this.speed = 30
-    var c = color.generate()
-    c = c.substring(1, c.length)
-    this.color = parseInt(c, 16)
   }
 
   send(msg, data) {
@@ -35,25 +29,18 @@ class Player {
     info.sizeX = this.sizeX
     info.sizeY = this.sizeY
 
-    info.vx = this.vx
-    info.vy = this.vy
-
     info.speed = this.speed
-    info.color = this.color
 
     return info
   }
 
   update (deltaTime) {
-    this.x += this.vx * this.speed * deltaTime
-    this.y += this.vy * this.speed * deltaTime
+
   }
   setVelocityY (vy) {
-    this.vy = vy
   }
 
   setVelocityX (vx) {
-    this.vx = vx
   }
 }
 

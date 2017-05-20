@@ -21,20 +21,20 @@ function Server (opts) {
 
     this.emitter.emit('connect', wrapper)
 
-    client.on('left', (data) => {
-      this.emitter.emit('left', data)
+    client.on('left', () => {
+      this.emitter.emit('left', client.id)
     })
 
-    client.on('right', (data) => {
-      this.emitter.emit('right', data)
+    client.on('right', () => {
+      this.emitter.emit('right', client.id)
     })
 
-    client.on('up', (data) => {
-      this.emitter.emit('up', data)
+    client.on('up', () => {
+      this.emitter.emit('up', client.id)
     })
 
-    client.on('down', (data) => {
-      this.emitter.emit('down', data)
+    client.on('down', () => {
+      this.emitter.emit('down', client.id)
     })
 
     client.on('disconnect', () => {
