@@ -25,18 +25,22 @@ class Game {
     })
 
     this.server.on('left', (id) => {
+      this.players[id].x -= this.players[id].speed
       console.log('left key pressed')
     })
 
-    this.server.on('right', (data) => {
+    this.server.on('right', (id) => {
+      this.players[id].x += this.players[id].speed
       console.log('right key pressed')
     })
 
     this.server.on('up', (id) => {
+      this.players[id].y -= this.players[id].speed
       console.log('up key pressed')
     })
 
     this.server.on('down', (id) => {
+      this.players[id].y += this.players[id].speed
       console.log('down key pressed')
     })
 
@@ -52,7 +56,7 @@ class Game {
   }
 
   disconnectPlayer (data) {
-    delete this.players[data.client.id]
+    delete this.players[data.client]
 
     this.log('Player disconnected : ' + data.client.id)
   }
@@ -64,12 +68,19 @@ class Game {
     wrapper.emit('registered', newPlayer.getPlayerInfo())
     this.log('Player connected: ' + newPlayer.id)
 
+    debugger
+    for (var id in this.players) {
+      if (id !== newPlayer.id) {
+        wrapper.emit('newPlayer', this.players[id].getPlayerInfo())
+      }
+    }
+
     this.sendToAll('newPlayer', newPlayer.getPlayerInfo(), newPlayer.id)
   }
 
   sendToAll (msg, data, except) {
     for (var id in this.players) {
-      if (this.players[id] !== except) {
+      if (id !== except) {
         this.players[id].emit(msg, data)
       }
     }
@@ -88,8 +99,7 @@ class Game {
       this.players[id].update(delta)
     }
 
-    this.sendToAll('update')
-    // this.updateAllClients()
+    this.updateAllClients()
   }
 }
 
