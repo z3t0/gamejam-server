@@ -5,16 +5,16 @@ class Player {
     this.emit = opts.emit
 
     this.id = opts.id
-    this.x = 0
-    this.y = 0
+    this.x = 200
+    this.y = 200
 
-    this.sizeX = 0.05
-    this.sizeY = 0.05
+    this.sizeX = 0.5
+    this.sizeY = 0.5
 
     this.heading = 0
 
     this.speed = 30
-    this.turnSpeed = 1
+    this.turnSpeed = 0.5
 
     this.keys = {}
     this.keys.left = false
